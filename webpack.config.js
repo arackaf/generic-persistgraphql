@@ -7,6 +7,20 @@ module.exports = {
     filename: "[name].test.js",
     path: path.resolve(__dirname, "test/dist")
   },
+  module: {
+    rules: [
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "./loader",
+          options: {
+            path: path.resolve(__dirname, "extracted_queries.json")
+          }
+        }
+      }
+    ]
+  },
   resolve: {
     modules: [path.resolve("./node_modules")]
   },
