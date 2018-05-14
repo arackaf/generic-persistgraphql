@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "concurrently \"node testEndpoint/index.js\" \"webpack && jest --runInBand\" "
+    "test": "webpack && jest --runInBand"
   },
   "author": "",
   "license": "ISC",
