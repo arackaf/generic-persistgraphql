@@ -1,4 +1,4 @@
-import query1 from "./query1.graphql";
+import authorsQuery from "./authors.graphql";
 import { fetchAndMatch } from "./testUtil/queryAndVerify";
 import "isomorphic-fetch";
 
@@ -13,7 +13,10 @@ afterAll(() => {
 });
 
 test("Bool match true", async () => {
-  await fetchAndMatch({ query: `query { getBooks{ title } }` });
+  await fetchAndMatch({
+    query: authorsQuery,
+    results: [{ author: "Richard Dawkins" }, { author: "Richard Dawkins" }, { author: "Steven Pinker" }, { author: "Steven Pinker" }]
+  });
 
   expect(1).toBe(1);
 });

@@ -6,8 +6,11 @@ export const fetchAndMatch = async ({ query, variables, name, results }) => {
   )
     .then(resp => resp.json())
     .then(resp => {
-      expect(1).toBe(1);
-      console.log(JSON.stringify(resp));
+      if (!resp || !resp.data || !resp.data.getBooks) {
+        fail("Bad response: " + JSON.stringify(resp));
+      } else {
+        expect(resp.data.getBooks).toEqual(results);
+      }
     })
     .catch(err => {
       console.log("ERROR", err);

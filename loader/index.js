@@ -8,6 +8,7 @@ module.exports = function(src) {
   let queryLookup = eval("(" + fs.readFileSync(options.path) + ")");
   let queryAsString = print(tag(src));
 
+  console.error(`Query ${queryAsString} not found`);
   if (!(queryAsString in queryLookup)) {
     throw `Query ${queryAsString} not found`;
   }

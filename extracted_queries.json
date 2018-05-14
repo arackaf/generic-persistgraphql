@@ -1,1 +1,1 @@
-{"query getBooksSubjects {\n  getBooks {\n    title\n    author\n  }\n}\n":1}
+{"query getBooksSubjects {\n  getBooks {\n    author\n  }\n}\n":1}

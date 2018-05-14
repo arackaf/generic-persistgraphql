@@ -6,6 +6,8 @@ import resolvers from "../graphQL/resolver";
 import typeDefs from "../graphQL/schema";
 import cors from "cors";
 
+import middleware from "../../middleware/index";
+
 export default {
   create() {
     const schema = makeExecutableSchema({ typeDefs, resolvers, initialValue: {} });
@@ -14,6 +16,8 @@ export default {
     const root = {};
 
     app.use(cors());
+
+    middleware(app, { url: "/graphql" });
     app.use(
       "/graphql",
       expressGraphql({
