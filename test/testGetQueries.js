@@ -2,7 +2,7 @@ import query1 from "./query1.graphql";
 import { fetchAndMatch } from "./testUtil/queryAndVerify";
 import "isomorphic-fetch";
 
-import Server1 from "../testEndpoint/endpoint1";
+import Server1 from "./endpoint1";
 
 beforeAll(() => {
   Server1.create();

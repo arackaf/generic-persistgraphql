@@ -20,7 +20,7 @@ module.exports = {
         }
       }
     ],
-    noParse: /testEndpoint|isomorphic-fetch/
+    noParse: /endpoint|isomorphic-fetch/
   },
   resolve: {
     modules: [path.resolve("./node_modules")]
