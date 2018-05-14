@@ -1,6 +1,7 @@
 import express from "express";
 import expressGraphql from "express-graphql";
 import { makeExecutableSchema } from "graphql-tools";
+import path from "path";
 
 import resolvers from "../graphQL/resolver";
 import typeDefs from "../graphQL/schema";
@@ -17,7 +18,7 @@ export default {
 
     app.use(cors());
 
-    middleware(app, { url: "/graphql" });
+    middleware(app, { url: "/graphql", mappingFile: path.resolve(__dirname, "../../extracted_queries.json") });
     app.use(
       "/graphql",
       expressGraphql({
