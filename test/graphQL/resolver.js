@@ -8,6 +8,9 @@ const allBooks = [
 export default {
   Query: {
     getBooks(root, args) {
+      if (args.title) {
+        return allBooks.filter(book => book.title == args.title);
+      }
       return allBooks;
     }
   }

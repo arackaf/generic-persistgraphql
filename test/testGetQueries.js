@@ -1,4 +1,5 @@
 import authorsQuery from "./authors.graphql";
+import authorsOfBook from "./authorsOfBook.graphql";
 import { fetchAndMatch } from "./testUtil/queryAndVerify";
 import "isomorphic-fetch";
 
@@ -12,11 +13,17 @@ afterAll(() => {
   Server1.dispose();
 });
 
-test("Bool match true", async () => {
+test("Basic GET", async () => {
   await fetchAndMatch({
     query: authorsQuery,
     results: [{ author: "Richard Dawkins" }, { author: "Richard Dawkins" }, { author: "Steven Pinker" }, { author: "Steven Pinker" }]
   });
+});
 
-  expect(1).toBe(1);
+test("GET with variables", async () => {
+  await fetchAndMatch({
+    query: authorsOfBook,
+    variables: { titleVar: "The Selfish Gene" },
+    results: [{ author: "Richard Dawkins" }]
+  });
 });

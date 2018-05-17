@@ -1,5 +1,6 @@
 import fs from "fs";
 import { invert } from "lodash";
+import parse from "url-parse";
 
 export default (app, { url, mappingFile }) => {
   const jsonContent = eval("(" + fs.readFileSync(mappingFile) + ")");
@@ -8,8 +9,12 @@ export default (app, { url, mappingFile }) => {
   app.get(url, (req, resp, next) => {
     if (req.query.query) {
       let realQuery = queryMap[req.query.query];
-      req.query.query = realQuery;
-      req.url = req.url.replace(/query=.+/, "query=" + realQuery);
+      //TODO: add allowUnrestricted option and reject in else
+      if (realQuery) {
+        let parsed = parse(req.url, true);
+        parsed.query.query = realQuery;
+        req.url = parsed.toString();
+      }
     }
     next();
   });

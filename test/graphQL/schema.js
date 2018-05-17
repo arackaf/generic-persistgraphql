@@ -6,7 +6,7 @@ type Book {
 }
 
 type Query {
-  getBooks: [Book]
+  getBooks(title: String): [Book]
 }
 
 `;
