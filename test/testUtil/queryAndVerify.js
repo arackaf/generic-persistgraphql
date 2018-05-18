@@ -6,5 +6,5 @@ export const fetchAndMatch = async ({ query, variables, name, results }) =>
   )
     .then(resp => resp.json())
     .then(resp => {
-      expect(resp.data.getBooks).toEqual(results);
+      expect(resp.data).toEqual(results);
     });

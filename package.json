@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "persistgraphql ./test && webpack && jest --runInBand"
+    "dev": "persistgraphql ./test && webpack -w",
+    "test": "jest --runInBand",
+    "testw": "jest --runInBand --watchAll"
   },
   "author": "",
   "license": "ISC",

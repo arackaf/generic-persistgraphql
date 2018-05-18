@@ -1,4 +1,4 @@
-query getBooksSubjectsWithTitle($titleVar: String) {
+query getBooksAuthorsByTitle($titleVar: String) {
   getBooks(title: $titleVar) {
     author
   }

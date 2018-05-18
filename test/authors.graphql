@@ -1,4 +1,4 @@
-query getBooksSubjects {
+query getBooksAuthors {
   getBooks {
     author
   }

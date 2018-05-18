@@ -1,5 +1,7 @@
 import authorsQuery from "./authors.graphql";
+import authorsAndTitles from "./authorsThenTitles.graphql";
 import authorsOfBook from "./authorsOfBook.graphql";
+import authorsThenTitlesOfBook from "./authorsThenTitlesOfBook.graphql";
 import { fetchAndMatch } from "./testUtil/queryAndVerify";
 import "isomorphic-fetch";
 
@@ -16,7 +18,17 @@ afterAll(() => {
 test("Basic GET", async () => {
   await fetchAndMatch({
     query: authorsQuery,
-    results: [{ author: "Richard Dawkins" }, { author: "Richard Dawkins" }, { author: "Steven Pinker" }, { author: "Steven Pinker" }]
+    results: { getBooks: [{ author: "Richard Dawkins" }, { author: "Richard Dawkins" }, { author: "Steven Pinker" }, { author: "Steven Pinker" }] }
+  });
+});
+
+test("Basic GET - two queries", async () => {
+  await fetchAndMatch({
+    query: authorsAndTitles,
+    results: {
+      authors: [{ author: "Richard Dawkins" }, { author: "Richard Dawkins" }, { author: "Steven Pinker" }, { author: "Steven Pinker" }],
+      titles: [{ title: "The Selfish Gene" }, { title: "The Blind Watchmaker" }, { title: "The Blank Slate" }, { title: "Word Rules" }]
+    }
   });
 });
 
@@ -24,6 +36,17 @@ test("GET with variables", async () => {
   await fetchAndMatch({
     query: authorsOfBook,
     variables: { titleVar: "The Selfish Gene" },
-    results: [{ author: "Richard Dawkins" }]
+    results: { getBooks: [{ author: "Richard Dawkins" }] }
+  });
+});
+
+test("GET with variables two queries", async () => {
+  await fetchAndMatch({
+    query: authorsThenTitlesOfBook,
+    variables: { titleVar: "The Selfish Gene" },
+    results: {
+      authors: [{ author: "Richard Dawkins" }],
+      titles: [{ title: "The Selfish Gene" }]
+    }
   });
 });
