@@ -4,14 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "persistgraphql ./test-src && webpack -w",
+    "webpack": "persistgraphql ./test-src && webpack",
+    "webpackw": "persistgraphql ./test-src && webpack -w",
     "test": "jest --runInBand",
-    "testw": "jest --runInBand --watchAll"
+    "testw": "jest --runInBand --watchAll",
+    "start": "concurrently \"npm run webpackw\" \"npm run testw\""
   },
   "author": "",
   "license": "ISC",
   "jest": {
-    "watchPathIgnorePatterns": ["test-src"]
+    "watchPathIgnorePatterns": [
+      "test-src",
+      "package.json",
+      "package-lock.json"
+    ]
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
