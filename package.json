@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "persistgraphql ./test && webpack -w",
+    "dev": "persistgraphql ./test-src && webpack -w",
     "test": "jest --runInBand",
     "testw": "jest --runInBand --watchAll"
   },
   "author": "",
   "license": "ISC",
+  "jest": {
+    "watchPathIgnorePatterns": ["test-src"]
+  },
   "devDependencies": {
     "concurrently": "^3.5.1",
     "cors": "^2.8.4",

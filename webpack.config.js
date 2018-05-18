@@ -2,10 +2,10 @@ const path = require("path");
 const glob = require("glob");
 
 module.exports = {
-  entry: glob.sync("./test/*.js").reduce((obj, f) => ((obj[f.replace(/\.\/test\/(.*)\.js/, (s, name) => name)] = f), obj), {}),
+  entry: glob.sync("./test-src/*.js").reduce((obj, f) => ((obj[f.replace(/\.\/test-src\/(.*)\.js/, (s, name) => name)] = f), obj), {}),
   output: {
     filename: "[name].test.js",
-    path: path.resolve(__dirname, "test/dist")
+    path: path.resolve(__dirname, "test")
   },
   module: {
     rules: [

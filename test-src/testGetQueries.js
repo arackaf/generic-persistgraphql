@@ -1,7 +1,7 @@
-import authorsQuery from "./authors.graphql";
-import authorsAndTitles from "./authorsThenTitles.graphql";
-import authorsOfBook from "./authorsOfBook.graphql";
-import authorsThenTitlesOfBook from "./authorsThenTitlesOfBook.graphql";
+import authorsQuery from "./graphQL/queries/authors.graphql";
+import authorsAndTitles from "./graphQL/queries/authorsThenTitles.graphql";
+import authorsOfBook from "./graphQL/queries/authorsOfBook.graphql";
+import authorsThenTitlesOfBook from "./graphQL/queries/authorsThenTitlesOfBook.graphql";
 import { fetchAndMatch } from "./testUtil/queryAndVerify";
 import "isomorphic-fetch";
 
