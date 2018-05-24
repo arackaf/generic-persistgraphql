@@ -2,7 +2,7 @@ import authorsQuery from "./graphQL/queries/authors.graphql";
 import authorsAndTitles from "./graphQL/queries/authorsThenTitles.graphql";
 import authorsOfBook from "./graphQL/queries/authorsOfBook.graphql";
 import authorsThenTitlesOfBook from "./graphQL/queries/authorsThenTitlesOfBook.graphql";
-import { requestAndMatch } from "./testUtil/queryAndVerify";
+import { requestAndMatch } from "./testUtil/queryVerificationUtils";
 
 import Server1 from "./endpoint1";
 
