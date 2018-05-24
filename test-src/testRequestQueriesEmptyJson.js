@@ -1,7 +1,7 @@
-import authorsQuery from "./graphQL/queries/authors.txt";
-import authorsAndTitles from "./graphQL/queries/authorsThenTitles.txt";
-import authorsOfBook from "./graphQL/queries/authorsOfBook.txt";
-import authorsThenTitlesOfBook from "./graphQL/queries/authorsThenTitlesOfBook.txt";
+import authorsQuery from "./graphQL-files/queries/authors.txt";
+import authorsAndTitles from "./graphQL-files/queries/authorsThenTitles.txt";
+import authorsOfBook from "./graphQL-files/queries/authorsOfBook.txt";
+import authorsThenTitlesOfBook from "./graphQL-files/queries/authorsThenTitlesOfBook.txt";
 import { requestAndMatch } from "./testUtil/queryVerificationUtils";
 
 import Server2 from "./endpoint2";

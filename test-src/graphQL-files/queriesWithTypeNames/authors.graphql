@@ -1,0 +1,5 @@
+query getBooksAuthors {
+  getBooks {
+    author
+  }
+}

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "webpack": "persistgraphql ./test-src && webpack",
-    "webpackw": "persistgraphql ./test-src && webpack -w",
+    "persistgraphql": "persistgraphql ./test-src/graphQL-files/queries && persistgraphql ./test-src/graphQL-files/queriesWithTypeNames extracted_queries_typename.json --add_typename",
+    "webpack": "npm run persistgraphql && webpack",
+    "webpackw": "npm run persistgraphql && webpack -w",
     "test": "jest --runInBand",
     "testw": "jest --runInBand --watchAll",
     "start": "concurrently \"npm run webpackw\" \"npm run testw\""
@@ -39,6 +40,7 @@
     "graphql-request": "^1.6.0",
     "graphql-tag": "^2.9.2",
     "loader-utils": "^1.1.0",
+    "persistgraphql": "^0.3.11",
     "url-parse": "^1.4.0"
   }
 }

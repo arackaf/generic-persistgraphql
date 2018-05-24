@@ -1,0 +1,5 @@
+query getBooksAuthorsByTitle($titleVar: String) {
+  getBooks(title: $titleVar) {
+    author
+  }
+}

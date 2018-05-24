@@ -1,18 +1,18 @@
-import authorsQuery from "./graphQL-files/queries/authors.txt";
-import authorsAndTitles from "./graphQL-files/queries/authorsThenTitles.txt";
-import authorsOfBook from "./graphQL-files/queries/authorsOfBook.txt";
-import authorsThenTitlesOfBook from "./graphQL-files/queries/authorsThenTitlesOfBook.txt";
+import authorsQuery from "./graphQL-files/queriesWithTypeNames/authors.graphql";
+import authorsAndTitles from "./graphQL-files/queriesWithTypeNames/authorsThenTitles.graphql";
+import authorsOfBook from "./graphQL-files/queriesWithTypeNames/authorsOfBook.graphql";
+import authorsThenTitlesOfBook from "./graphQL-files/queriesWithTypeNames/authorsThenTitlesOfBook.graphql";
 import { fetchAndMatch } from "./testUtil/queryVerificationUtils";
 import "isomorphic-fetch";
 
-import Server2 from "./endpoint2";
-
+import Server4 from "./endpoint4";
+//
 beforeAll(() => {
-  Server2.create();
+  Server4.create();
 });
 
 afterAll(() => {
-  Server2.dispose();
+  Server4.dispose();
 });
 
 test("Basic GET", async () => {

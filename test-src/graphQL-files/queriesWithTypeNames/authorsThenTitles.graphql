@@ -1,0 +1,8 @@
+query getBooksAuthorsThenTitles {
+  authors: getBooks {
+    author
+  }
+  titles: getBooks {
+    title
+  }
+}

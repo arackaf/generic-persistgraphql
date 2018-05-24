@@ -1,29 +1,28 @@
-import authorsQuery from "./graphQL-files/queries/authors.txt";
-import authorsAndTitles from "./graphQL-files/queries/authorsThenTitles.txt";
-import authorsOfBook from "./graphQL-files/queries/authorsOfBook.txt";
-import authorsThenTitlesOfBook from "./graphQL-files/queries/authorsThenTitlesOfBook.txt";
-import { fetchAndMatch } from "./testUtil/queryVerificationUtils";
-import "isomorphic-fetch";
+import authorsQuery from "./graphQL-files/queriesWithTypeNames/authors.graphql";
+import authorsAndTitles from "./graphQL-files/queriesWithTypeNames/authorsThenTitles.graphql";
+import authorsOfBook from "./graphQL-files/queriesWithTypeNames/authorsOfBook.graphql";
+import authorsThenTitlesOfBook from "./graphQL-files/queriesWithTypeNames/authorsThenTitlesOfBook.graphql";
+import { requestAndMatch } from "./testUtil/queryVerificationUtils";
 
-import Server2 from "./endpoint2";
+import Server4 from "./endpoint4";
 
 beforeAll(() => {
-  Server2.create();
+  Server4.create();
 });
 
 afterAll(() => {
-  Server2.dispose();
+  Server4.dispose();
 });
 
 test("Basic GET", async () => {
-  await fetchAndMatch({
+  await requestAndMatch({
     query: authorsQuery,
     results: { getBooks: [{ author: "Richard Dawkins" }, { author: "Richard Dawkins" }, { author: "Steven Pinker" }, { author: "Steven Pinker" }] }
   });
 });
 
 test("Basic GET - two queries", async () => {
-  await fetchAndMatch({
+  await requestAndMatch({
     query: authorsAndTitles,
     results: {
       authors: [{ author: "Richard Dawkins" }, { author: "Richard Dawkins" }, { author: "Steven Pinker" }, { author: "Steven Pinker" }],
@@ -33,7 +32,7 @@ test("Basic GET - two queries", async () => {
 });
 
 test("GET with variables", async () => {
-  await fetchAndMatch({
+  await requestAndMatch({
     query: authorsOfBook,
     variables: { titleVar: "The Selfish Gene" },
     results: { getBooks: [{ author: "Richard Dawkins" }] }
@@ -41,7 +40,7 @@ test("GET with variables", async () => {
 });
 
 test("GET with variables two queries", async () => {
-  await fetchAndMatch({
+  await requestAndMatch({
     query: authorsThenTitlesOfBook,
     variables: { titleVar: "The Selfish Gene" },
     results: {
