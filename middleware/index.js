@@ -2,7 +2,7 @@ import fs from "fs";
 import { invert } from "lodash";
 import parse from "url-parse";
 
-export default (app, { url, mappingFile }) => {
+export default (app, { url, mappingFile, onQueryNotFound }) => {
   const jsonContent = eval("(" + fs.readFileSync(mappingFile) + ")");
   const queryMap = invert(jsonContent);
 
@@ -14,6 +14,9 @@ export default (app, { url, mappingFile }) => {
         let parsed = parse(req.url, true);
         parsed.query.query = realQuery;
         req.url = parsed.toString();
+        return next();
+      } else if (onQueryNotFound) {
+        return onQueryNotFound(req, resp, next);
       }
     }
     next();
@@ -25,6 +28,9 @@ export default (app, { url, mappingFile }) => {
       //TODO: add allowUnrestricted option and reject in else
       if (realQuery) {
         req.body.query = realQuery;
+        return next();
+      } else if (onQueryNotFound) {
+        return onQueryNotFound(req, resp, next);
       }
     }
     next();
