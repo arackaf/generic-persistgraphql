@@ -18,6 +18,10 @@ module.exports = {
             path: path.resolve(__dirname, "extracted_queries.json")
           }
         }
+      },
+      {
+        test: /\.txt$/,
+        use: "raw-loader"
       }
     ],
     noParse: /endpoint|isomorphic-fetch/
