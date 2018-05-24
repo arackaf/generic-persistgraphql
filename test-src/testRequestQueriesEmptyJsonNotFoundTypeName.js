@@ -1,7 +1,7 @@
-import authorsQuery from "./graphQL-files/queriesWithTypeNames/authors.graphql";
-import authorsAndTitles from "./graphQL-files/queriesWithTypeNames/authorsThenTitles.graphql";
-import authorsOfBook from "./graphQL-files/queriesWithTypeNames/authorsOfBook.graphql";
-import authorsThenTitlesOfBook from "./graphQL-files/queriesWithTypeNames/authorsThenTitlesOfBook.graphql";
+import authorsQuery from "./graphQL-files/typeNameQueries/authors.graphql";
+import authorsAndTitles from "./graphQL-files/typeNameQueries/authorsThenTitles.graphql";
+import authorsOfBook from "./graphQL-files/typeNameQueries/authorsOfBook.graphql";
+import authorsThenTitlesOfBook from "./graphQL-files/typeNameQueries/authorsThenTitlesOfBook.graphql";
 import { requestAndMatch } from "./testUtil/queryVerificationUtils";
 
 import Server4 from "./endpoint4";
@@ -17,7 +17,14 @@ afterAll(() => {
 test("Basic GET", async () => {
   await requestAndMatch({
     query: authorsQuery,
-    results: { getBooks: [{ author: "Richard Dawkins" }, { author: "Richard Dawkins" }, { author: "Steven Pinker" }, { author: "Steven Pinker" }] }
+    results: {
+      getBooks: [
+        { __typename: "Book", author: "Richard Dawkins" },
+        { __typename: "Book", author: "Richard Dawkins" },
+        { __typename: "Book", author: "Steven Pinker" },
+        { __typename: "Book", author: "Steven Pinker" }
+      ]
+    }
   });
 });
 
@@ -25,8 +32,18 @@ test("Basic GET - two queries", async () => {
   await requestAndMatch({
     query: authorsAndTitles,
     results: {
-      authors: [{ author: "Richard Dawkins" }, { author: "Richard Dawkins" }, { author: "Steven Pinker" }, { author: "Steven Pinker" }],
-      titles: [{ title: "The Selfish Gene" }, { title: "The Blind Watchmaker" }, { title: "The Blank Slate" }, { title: "Word Rules" }]
+      authors: [
+        { __typename: "Book", author: "Richard Dawkins" },
+        { __typename: "Book", author: "Richard Dawkins" },
+        { __typename: "Book", author: "Steven Pinker" },
+        { __typename: "Book", author: "Steven Pinker" }
+      ],
+      titles: [
+        { __typename: "Book", title: "The Selfish Gene" },
+        { __typename: "Book", title: "The Blind Watchmaker" },
+        { __typename: "Book", title: "The Blank Slate" },
+        { __typename: "Book", title: "Word Rules" }
+      ]
     }
   });
 });
@@ -35,7 +52,7 @@ test("GET with variables", async () => {
   await requestAndMatch({
     query: authorsOfBook,
     variables: { titleVar: "The Selfish Gene" },
-    results: { getBooks: [{ author: "Richard Dawkins" }] }
+    results: { getBooks: [{ __typename: "Book", author: "Richard Dawkins" }] }
   });
 });
 
@@ -44,8 +61,8 @@ test("GET with variables two queries", async () => {
     query: authorsThenTitlesOfBook,
     variables: { titleVar: "The Selfish Gene" },
     results: {
-      authors: [{ author: "Richard Dawkins" }],
-      titles: [{ title: "The Selfish Gene" }]
+      authors: [{ __typename: "Book", author: "Richard Dawkins" }],
+      titles: [{ __typename: "Book", title: "The Selfish Gene" }]
     }
   });
 });

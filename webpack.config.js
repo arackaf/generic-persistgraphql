@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         test: /\.(graphql|gql)$/,
-        include: path.resolve(__dirname, "test-src/graphQL-files/queriesWithTypeNames"),
+        include: path.resolve(__dirname, "test-src/graphQL-files/typeNameQueries"),
         exclude: /node_modules/,
         use: {
           loader: "./loader",

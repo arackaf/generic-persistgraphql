@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "persistgraphql": "persistgraphql ./test-src/graphQL-files/queries && persistgraphql ./test-src/graphQL-files/queriesWithTypeNames extracted_queries_typename.json --add_typename",
+    "persistgraphql": "persistgraphql ./test-src/graphQL-files/queries && persistgraphql ./test-src/graphQL-files/typeNameQueries extracted_queries_typename.json --add_typename",
     "webpack": "npm run persistgraphql && webpack",
     "webpackw": "npm run persistgraphql && webpack -w",
     "test": "jest --runInBand",
     "testw": "jest --runInBand --watchAll",
-    "start": "concurrently \"npm run webpackw\" \"npm run testw\""
+    "start": "concurrently \"npm run webpackw\" \"npm run testw\"",
+    "run": "npm run webpack && npm run test"
   },
   "author": "",
   "license": "ISC",
