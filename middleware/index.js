@@ -18,4 +18,15 @@ export default (app, { url, mappingFile }) => {
     }
     next();
   });
+
+  app.post(url, (req, resp, next) => {
+    if (req.body.query) {
+      let realQuery = queryMap[req.body.query];
+      //TODO: add allowUnrestricted option and reject in else
+      if (realQuery) {
+        req.body.query = realQuery;
+      }
+    }
+    next();
+  });
 };

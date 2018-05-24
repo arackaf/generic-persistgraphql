@@ -1,3 +1,6 @@
+import "isomorphic-fetch";
+import { request } from "graphql-request";
+
 export const fetchAndMatch = async ({ query, variables, name, results }) =>
   fetch(
     `http://localhost:3000/graphql?query=${encodeURIComponent(query)}${
@@ -8,3 +11,8 @@ export const fetchAndMatch = async ({ query, variables, name, results }) =>
     .then(resp => {
       expect(resp.data).toEqual(results);
     });
+
+export const requestAndMatch = async ({ query, variables, name, results }) =>
+  request(`http://localhost:3000/graphql`, query, variables).then(resp => {
+    expect(resp).toEqual(results);
+  });

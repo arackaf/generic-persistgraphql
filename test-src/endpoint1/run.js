@@ -6,6 +6,7 @@ import path from "path";
 import resolvers from "../graphQL/resolver";
 import typeDefs from "../graphQL/schema";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 import middleware from "../../middleware/index";
 
@@ -17,6 +18,14 @@ export default {
     const root = {};
 
     app.use(cors());
+
+    app.use(bodyParser.json()); // to support JSON-encoded bodies
+    app.use(
+      bodyParser.urlencoded({
+        // to support URL-encoded bodies
+        extended: true
+      })
+    );
 
     middleware(app, { url: "/graphql", mappingFile: path.resolve(__dirname, "../../extracted_queries.json") });
     app.use(
