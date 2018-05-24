@@ -11,11 +11,24 @@ module.exports = {
     rules: [
       {
         test: /\.(graphql|gql)$/,
+        include: path.resolve(__dirname, "test-src/graphQL-files/queries"),
         exclude: /node_modules/,
         use: {
           loader: "./loader",
           options: {
             path: path.resolve(__dirname, "extracted_queries.json")
+          }
+        }
+      },
+      {
+        test: /\.(graphql|gql)$/,
+        include: path.resolve(__dirname, "test-src/graphQL-files/queriesWithTypeNames"),
+        exclude: /node_modules/,
+        use: {
+          loader: "./loader",
+          options: {
+            path: path.resolve(__dirname, "extracted_queries_typename.json"),
+            add_typename: true
           }
         }
       },
