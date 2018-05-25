@@ -12,7 +12,11 @@ This project provides you with two simple pieces to accompany persistgraphql: a 
 
 ## How does it work
 
-First, set up your webpack loader like this
+First, run `persistgraphql` however you need. For details on how to do so, check out [the docs](https://github.com/apollographql/persistgraphql)
+
+---
+
+Then set up your webpack loader
 
 ```javascript
 {
@@ -21,13 +25,19 @@ First, set up your webpack loader like this
   use: {
     loader: "generic-persistgraphql/loader",
     options: {
-      path: path.resolve(__dirname, "extracted_queries.json")
+      path: path.resolve(__dirname, "extracted_queries.json"),
+      add_typename: true
     }  
   }
 }
 ```
 
-then apply your Node middleware
+`path` is a path to the json file persistgraphql created for you.
+`add_typename` is the same thing as the `add_typename` option in persistgraphql. If you set it to true there, be sure to set it to true here. Conversely, if you don't set it there, don't set it here.
+
+---
+
+Then apply your Node middleware
 
 ```javascript
 import { middleware } from "generic-persistgraphql";
@@ -35,6 +45,11 @@ import { middleware } from "generic-persistgraphql";
 // do this BEFORE your app.use("/graphql", ....) statement
 middleware(app, { url: "/graphql", mappingFile: path.resolve(__dirname, "./react-redux/extracted_queries.json") });
 ```
+
+`url` is your graphql url.
+`mappingFile` is the path to the json file persistgraphql created for you.
+
+---
 
 Now import any queries or mutations you have in .graphql files, and then send that query over however you normally would.
 
