@@ -2,13 +2,11 @@
 
 This project enables persisted graphql queries in a generic way, not tied to any particular GraphQL client, like Apollo. For an outstanding primer on what persisted queries are, check out this [blog post](https://dev-blog.apollodata.com/persisted-graphql-queries-with-apollo-client-119fd7e6bba5)
 
-This project enables persisted graphql queries in a generic way, not tied to any particular GraphQL client, like Apollo. For an outstanding primer on what persisted queries are, check out this [blog post](https://dev-blog.apollodata.com/persisted-graphql-queries-with-apollo-client-119fd7e6bba5)
-
 ## Why is this project needed
 
-The persistgraphql package is wonderfully simple, and effective. It allows you to automatically create a map of all valid graphql queries in your application; however, the accompanying tools tend to assume you're using a heavy graphql client like Apollo.
+The persistgraphql package is wonderfully simple, and effective. It allows you to automatically create a map of all valid graphql queries in your application; however, the accompanying tools tend to assume you're using a particular graphql client like Apollo.
 
-This project provides you with two simple pieces to accompany persistgraphql: a webpack loader which will take imports from .graphql files, and return you the actual id from the json mapping file; and a Node middleware that will lookup the graphql query id's that are sent over as queries, and replace them with the actual query. In addition to letting you reap the normal benefits of persisted queries, like saving bandwidth and preventing restricted query execution, you can do so without needing to pull in the graphql-tag package, or even the query text itself.
+This project provides you with two simple pieces to accompany persistgraphql: a webpack loader which will take imports from `.graphql` files, and return you the actual id from the json mapping file; and a Node middleware that will take the graphql query id's that are sent over, and replace them with the actual query from that same json map. In addition to letting you reap the normal benefits of persisted queries, like saving bandwidth and preventing restricted query execution, you can do so without needing to pull in the graphql-tag package, or even the query text itself.
 
 ## How does it work
 
@@ -32,8 +30,10 @@ Then set up your webpack loader
 }
 ```
 
+### Loader options
+
 `path` is a path to the json file persistgraphql created for you.
-`add_typename` is the same thing as the `add_typename` option in persistgraphql. If you set it to true there, be sure to set it to true here. Conversely, if you don't set it there, don't set it here.
+`add_typename` is the same as the `add_typename` option in persistgraphql. If you set it to true there, be sure to set it to true here. Conversely, if you don't set it there, don't set it here.
 
 ---
 
@@ -46,8 +46,21 @@ import { middleware } from "generic-persistgraphql";
 middleware(app, { url: "/graphql", mappingFile: path.resolve(__dirname, "./react-redux/extracted_queries.json") });
 ```
 
-`url` is your graphql url.
-`mappingFile` is the path to the json file persistgraphql created for you.
+### Middleware options
+
+`url`: Your graphql url.
+`mappingFile`: Path to the json file persistgraphql created for you.
+`onQueryNotFound`: If you'd like to prevent unrestricted query execution, provide a function here which will be called whenever a query or mutation comes over the wire which is not the key to a valid query in the json file. It will be called with the Express `request`, `response`, and `next` values. For example
+
+```javascript
+middleware(app, {
+  url: "/graphql",
+  mappingFile: path.resolve(__dirname, "./extracted_queries.json"),
+  onQueryNotFound: (req, resp, next) => {
+    return resp.send({ data: { notFound: true } });
+  }
+});
+```
 
 ---
 
