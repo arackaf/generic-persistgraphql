@@ -1,4 +1,4 @@
-# generic-persisted-queries
+# generic-persistgraphql
 
 This project enables persisted graphql queries in a generic way, not tied to any particular GraphQL client, like Apollo. For an outstanding primer on what persisted queries are, check out this [blog post](https://dev-blog.apollodata.com/persisted-graphql-queries-with-apollo-client-119fd7e6bba5)
 
