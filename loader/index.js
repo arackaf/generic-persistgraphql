@@ -7,7 +7,7 @@ const { addTypenameTransformer } = require("persistgraphql/lib/src/queryTransfor
 
 module.exports = function(src) {
   let options = getOptions(this);
-  let queryLookup = eval("(" + fs.readFileSync(options.path) + ")");
+  let queryLookup = JSON.parse(fs.readFileSync(options.path));
   let queryAsString = options.add_typename ? print(addTypenameTransformer(tag(src))) : print(tag(src));
 
   if (!(queryAsString in queryLookup)) {

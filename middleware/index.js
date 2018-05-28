@@ -3,7 +3,7 @@ import { invert } from "lodash";
 import parse from "url-parse";
 
 export default (app, { url, mappingFile, onQueryNotFound }) => {
-  const jsonContent = eval("(" + fs.readFileSync(mappingFile) + ")");
+  const jsonContent = JSON.parse(fs.readFileSync(mappingFile));
   const queryMap = invert(jsonContent);
 
   app.get(url, (req, resp, next) => {
