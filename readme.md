@@ -6,7 +6,7 @@ This project enables persisted graphql queries in a generic way, not tied to any
 
 The persistgraphql package is wonderfully simple, and effective. It allows you to automatically create a map of all valid graphql queries in your application; however, the accompanying tools tend to assume you're using a particular graphql client like Apollo.
 
-This project provides you with two simple pieces to accompany persistgraphql: a webpack loader which will take imports from `.graphql` files, and return you the actual id from the json mapping file; and a Node middleware that will take the graphql query id's that are sent over, and replace them with the actual query from that same json map. In addition to letting you reap the normal benefits of persisted queries, like saving bandwidth and preventing restricted query execution, you can do so without needing to pull in the graphql-tag package, or even the query text itself.
+This project provides you with two simple pieces to accompany persistgraphql: a webpack loader which will take imports from `.graphql` files, and return you the actual id from the json mapping file; and a Node middleware that will take the graphql query id's that are sent over, and replace them with the actual query from that same json map. In addition to letting you reap the normal benefits of persisted queries, like saving bandwidth and preventing unrestricted query execution, you can do so without needing to pull in the graphql-tag package, _or even the query text itself._
 
 ## How does it work
 
@@ -32,7 +32,8 @@ Then set up your webpack loader
 
 ### Loader options
 
-`path` is a path to the json file persistgraphql created for you.
+`path` is the path to the json file persistgraphql created for you.
+
 `add_typename` is the same as the `add_typename` option in persistgraphql. If you set it to true there, be sure to set it to true here. Conversely, if you don't set it there, don't set it here.
 
 ---
@@ -49,7 +50,9 @@ middleware(app, { url: "/graphql", mappingFile: path.resolve(__dirname, "./react
 ### Middleware options
 
 `url`: Your graphql url.
+
 `mappingFile`: Path to the json file persistgraphql created for you.
+
 `onQueryNotFound`: If you'd like to prevent unrestricted query execution, provide a function here which will be called whenever a query or mutation comes over the wire which is not the key to a valid query in the json file. It will be called with the Express `request`, `response`, and `next` values. For example
 
 ```javascript
@@ -64,7 +67,7 @@ middleware(app, {
 
 ---
 
-Now import any queries or mutations you have in .graphql files, and then send that query over however you normally would.
+Now import any queries or mutations you have in .graphql files, and then send them over however you normally would.
 
 ```javascript
 import getTags from "./getTags.graphql";
@@ -76,4 +79,4 @@ graphqlClient.runQuery(getTags, { publicUserId: publicUserId }).then(({ data: { 
 });
 ```
 
-The Node middleware will look in `req.query.query` for GET requests, or `req.body.query` for POSTS, and see if the value sent over matches the query ID in the extracted queries json file. If so, it'll swap the real query in for you.
+The Node middleware will look in `req.query.query` for GET requests, or `req.body.query` for POSTS, and see if the value sent over matches the query ID in the extracted queries json file. If so, it'll swap the real query in for you. If it's not found, it'll either just send the value along to the normal GraphQL middleware, or call `onQueryNotFound` if you provided a value for it.
