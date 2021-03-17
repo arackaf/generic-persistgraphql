@@ -1,6 +1,6 @@
 {
   "name": "generic-persistgraphql",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,26 +22,27 @@
     ]
   },
   "devDependencies": {
-    "body-parser": "^1.19.0",
-    "concurrently": "^3.5.1",
-    "cors": "^2.8.4",
+    "body-parser": "1.19.0",
+    "concurrently": "3.5.1",
+    "cors": "2.8.4",
     "express": "4.x",
-    "express-graphql": "^0.8.0",
-    "glob": "^7.1.4",
-    "graphql-tools": "^4.0.4",
-    "isomorphic-fetch": "^2.2.1",
-    "jest": "^24.8.0",
-    "raw-loader": "^2.0.0",
-    "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2"
+    "express-graphql": "0.8.0",
+    "glob": "7.1.4",
+    "graphql-tools": "4.0.4",
+    "isomorphic-fetch": "2.2.1",
+    "jest": "24.8.0",
+    "raw-loader": "2.0.0",
+    "webpack": "4.32.2",
+    "webpack-cli": "3.3.2"
   },
   "dependencies": {
-    "@std/esm": "^0.26.0",
-    "graphql": "^0.13.2",
-    "graphql-request": "^1.6.0",
-    "graphql-tag": "^2.9.2",
-    "loader-utils": "^1.1.0",
-    "persistgraphql": "^0.3.11",
-    "url-parse": "^1.4.7"
+    "esm": "3.2.25",
+    "graphql": "0.13.2",
+    "graphql-request": "1.6.0",
+    "graphql-tag": "2.9.2",
+    "loader-utils": "1.1.0",
+    "lodash.invert": "4.3.0",
+    "persistgraphql": "0.3.11",
+    "url-parse": "1.4.7"
   }
 }

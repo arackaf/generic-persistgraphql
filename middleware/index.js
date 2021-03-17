@@ -1,5 +1,5 @@
 import fs from "fs";
-import { invert } from "lodash";
+import invert from "lodash.invert";
 import parse from "url-parse";
 
 export default (app, { url, mappingFile, onQueryNotFound }) => {
