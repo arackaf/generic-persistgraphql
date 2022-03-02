@@ -43,6 +43,6 @@
     "loader-utils": "1.1.0",
     "lodash.invert": "4.3.0",
     "persistgraphql": "0.3.11",
-    "url-parse": "1.4.7"
+    "url-parse": "1.5.9"
   }
 }
