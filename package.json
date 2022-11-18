@@ -40,7 +40,7 @@
     "graphql": "0.13.2",
     "graphql-request": "1.6.0",
     "graphql-tag": "2.9.2",
-    "loader-utils": "1.1.0",
+    "loader-utils": "1.4.2",
     "lodash.invert": "4.3.0",
     "persistgraphql": "0.3.11",
     "url-parse": "1.4.7"
